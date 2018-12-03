@@ -7,8 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace UniWebsite
 {
-    public partial class _default : System.Web.UI.Page
+    public partial class _default : Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
