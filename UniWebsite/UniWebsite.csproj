@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="AddUser.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="GetAllStudents.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllStudents.aspx.cs">
+      <DependentUpon>GetAllStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetAllStudents.aspx.designer.cs">
+      <DependentUpon>GetAllStudents.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
