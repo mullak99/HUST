@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="AddStudent.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="EditStudent.aspx" />
     <Content Include="GetAllStudents.aspx" />
     <Content Include="GetStudent.aspx" />
     <Content Include="Web.config">
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditStudent.aspx.cs">
+      <DependentUpon>EditStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditStudent.aspx.designer.cs">
+      <DependentUpon>EditStudent.aspx</DependentUpon>
     </Compile>
     <Compile Include="GetAllStudents.aspx.cs">
       <DependentUpon>GetAllStudents.aspx</DependentUpon>

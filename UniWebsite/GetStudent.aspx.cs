@@ -14,26 +14,31 @@ namespace UniWebsite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            if (!IsPostBack)
             {
-                var query = "SELECT UID, CONCAT(FirstName, ' ', LastName) AS FullName FROM students";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    DataSet ds = new DataSet();
-                    MySqlDataAdapter da = new MySqlDataAdapter(command);
-                    connection.Open();
-                    da.Fill(ds, "Students");
+                    var query = "SELECT UID, CONCAT(FirstName, ' ', LastName) AS FullName FROM students";
 
-                    selectStudentList.DataSource = ds.Tables[0];
-                    selectStudentList.DataTextField = "FullName";
-                    selectStudentList.DataValueField = "UID";
-                    selectStudentList.DataBind();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        DataSet ds = new DataSet();
+                        MySqlDataAdapter da = new MySqlDataAdapter(command);
+                        connection.Open();
+                        da.Fill(ds, "Students");
+
+                        selectStudentList.DataSource = ds.Tables[0];
+                        selectStudentList.DataTextField = "FullName";
+                        selectStudentList.DataValueField = "UID";
+                        selectStudentList.DataBind();
+                    }
                 }
-            }
 
-            selectStudentList_SelectedIndexChanged(sender, e);
+                selectStudentList_SelectedIndexChanged(sender, e);
+            }
         }
+
+        DataTable dt = new DataTable();
 
         protected void selectStudentList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -60,8 +65,7 @@ namespace UniWebsite
                 }
             }
 
-            DataTable dt = new DataTable();
-            DataColumn dc = new DataColumn();
+            dt.Clear();
 
             if (dt.Columns.Count == 0)
             {

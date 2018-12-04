@@ -36,7 +36,6 @@ namespace UniWebsite
                         }
                     }
                 }
-
                 SetTable(studentNames, studentLocations, times);
             }
         }

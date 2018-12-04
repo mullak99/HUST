@@ -12,11 +12,19 @@
             <asp:Label ID="selectStudentLabel" runat="server" Text="Select Student:" ForeColor="White"></asp:Label>
         </div>
         <div>
+            <asp:ScriptManager ID="ScriptManager" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
             <div>
                 <asp:DropDownList ID="selectStudentList" runat="server" Height="25px" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="selectStudentList_SelectedIndexChanged"></asp:DropDownList>
             </div>
             <div><p></p></div>
-            <asp:GridView ID="StudentGrid" runat="server" ForeColor="White"></asp:GridView>
+            <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:GridView ID="StudentGrid" runat="server" ForeColor="White"></asp:GridView>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="selectStudentList" EventName="SelectedIndexChanged" runat="server"/>
+                </Triggers>
+            </asp:UpdatePanel>
         </div>
     </form>
 </body>
