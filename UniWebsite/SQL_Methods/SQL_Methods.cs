@@ -184,6 +184,29 @@ namespace UniWebsite
             }
         }
 
+        public static List<Location> GetStudentsLocationHistory(int studentUID)
+        {
+            List<Location> allLocations = new List<Location>();
+
+            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            {
+                var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = " + studentUID + " ORDER BY UID DESC";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            allLocations.Add(new Location(Convert.ToInt32(reader[0].ToString()), reader[1].ToString(), Utils.UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString()))));
+                        }
+                    }
+                }
+            }
+            return allLocations;
+        }
+
         #endregion
     }
 }

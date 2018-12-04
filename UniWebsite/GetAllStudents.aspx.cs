@@ -17,47 +17,44 @@ namespace UniWebsite
         {
             List<Student> allStudents = SQL_Methods.GetAllStudents();
 
-            try
-            {
-                SetTable(allStudents.Select(i => i.getFullName()).ToList(), allStudents.Select(i => i.LatestLocation.getLocation()).ToList(), allStudents.Select(i => i.LatestLocation.getCheckInString()).ToList());
-            }
-            catch
-            {
-                SetTable(allStudents.Select(i => i.getFullName()).ToList());
-            }
+            SetTable(allStudents);
         }
 
-        protected void SetTable(List<string> studentNames, List<string> studentLocations = null, List<string> times = null)
+        protected void SetTable(List<Student> allStudents)
         {
-            DataTable dt = new DataTable();
-            DataColumn dc = new DataColumn();
+            DataTable studentTable = new DataTable();
 
-            if (dt.Columns.Count == 0)
+            if (studentTable.Columns.Count == 0)
             {
-                dt.Columns.Add("Student Name", typeof(string));
-                dt.Columns.Add("Student Location", typeof(string));
-                dt.Columns.Add("Check-In Time", typeof(string));
+                studentTable.Columns.Add("Student Name", typeof(string));
+                studentTable.Columns.Add("Current Student Location", typeof(string));
+                studentTable.Columns.Add("Location Check-In Time", typeof(string));
             }
 
-            for (int i = 0; i < studentNames.Count; i++)
+            foreach (Student student in allStudents)
             {
-                DataRow NewRow = dt.NewRow();
-                NewRow[0] = studentNames[i];
+                DataRow NewRow = studentTable.NewRow();
+                NewRow[0] = student.getFullName();
 
-                if (studentLocations != null && !String.IsNullOrEmpty(studentLocations[i]))
-                    NewRow[1] = studentLocations[i];
-                else
+                try
+                {
+                    if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
+                        NewRow[1] = student.LatestLocation.getLocation();
+                    else
+                        NewRow[1] = "No Location";
+
+                    NewRow[2] = student.LatestLocation.getCheckInString();
+                }
+                catch
+                {
                     NewRow[1] = "No Location";
-
-
-                if (times != null && !String.IsNullOrEmpty(times[i]))
-                    NewRow[2] = times[i];
-                else
                     NewRow[2] = "No Check-In Time";
+                }
 
-                dt.Rows.Add(NewRow);
+                studentTable.Rows.Add(NewRow);
             }
-            allStudentsTable.DataSource = dt;
+
+            allStudentsTable.DataSource = studentTable;
             allStudentsTable.DataBind();
         }
     }

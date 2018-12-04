@@ -19,7 +19,14 @@
             <div><p></p></div>
             <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <asp:GridView ID="StudentGrid" runat="server" ForeColor="White"></asp:GridView>
+                    <div>
+                        <asp:GridView ID="StudentGrid" runat="server" ForeColor="White"></asp:GridView>
+                    </div>
+                    <div><p></p></div>
+                    <div>
+                        <p style="color:#FFFFFF">Location History for the past 24 hours:</p>
+                        <asp:GridView ID="LocationGrid" runat="server" ForeColor="White"></asp:GridView>
+                    </div>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="selectStudentList" EventName="SelectedIndexChanged" runat="server"/>
