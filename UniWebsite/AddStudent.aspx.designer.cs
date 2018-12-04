@@ -10,7 +10,7 @@
 namespace UniWebsite {
     
     
-    public partial class AddUser {
+    public partial class AddStudent {
         
         /// <summary>
         /// form1 control.
@@ -40,24 +40,6 @@ namespace UniWebsite {
         protected global::System.Web.UI.WebControls.Label studentNameLabel;
         
         /// <summary>
-        /// studentLastNameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label studentLastNameLabel;
-        
-        /// <summary>
-        /// studentLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox studentLastName;
-        
-        /// <summary>
         /// studentFirstNameLabel control.
         /// </summary>
         /// <remarks>
@@ -74,6 +56,24 @@ namespace UniWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox studentFirstName;
+        
+        /// <summary>
+        /// studentLastNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label studentLastNameLabel;
+        
+        /// <summary>
+        /// studentLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox studentLastName;
         
         /// <summary>
         /// studentLocationLabel control.

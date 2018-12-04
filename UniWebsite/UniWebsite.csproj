@@ -70,18 +70,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddUser.aspx" />
+    <Content Include="AddStudent.aspx" />
     <Content Include="default.aspx" />
     <Content Include="GetAllStudents.aspx" />
+    <Content Include="GetStudent.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUser.aspx.cs">
-      <DependentUpon>AddUser.aspx</DependentUpon>
+    <Compile Include="AddStudent.aspx.cs">
+      <DependentUpon>AddStudent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddUser.aspx.designer.cs">
-      <DependentUpon>AddUser.aspx</DependentUpon>
+    <Compile Include="AddStudent.aspx.designer.cs">
+      <DependentUpon>AddStudent.aspx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -96,6 +97,13 @@
     </Compile>
     <Compile Include="GetAllStudents.aspx.designer.cs">
       <DependentUpon>GetAllStudents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetStudent.aspx.cs">
+      <DependentUpon>GetStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetStudent.aspx.designer.cs">
+      <DependentUpon>GetStudent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
