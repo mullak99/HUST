@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace UniWebsite
 {
     public class Utils
     {
+        public static int CurrentUnixTimestamp()
+        {
+            return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        }
+
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -29,6 +35,14 @@ namespace UniWebsite
                 return string.Empty;
 
             return char.ToUpper(s[0]) + s.Substring(1);
+        }
+
+        public static void PopulateStudentDropDown(List<Student> students, ref DropDownList dropDownList)
+        {
+            dropDownList.DataSource = students;
+            dropDownList.DataTextField = "FullName";
+            dropDownList.DataValueField = "UID";
+            dropDownList.DataBind();
         }
     }
 }

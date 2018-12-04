@@ -15,32 +15,19 @@ namespace UniWebsite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<string> studentNames = new List<string>();
-            List<string> studentLocations = new List<string>();
-            List<DateTime> times = new List<DateTime>();
+            List<Student> allStudents = SQL_Methods.GetAllStudents();
 
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            try
             {
-                var query = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Location, Time FROM students";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            studentNames.Add(reader[0].ToString());
-                            studentLocations.Add(reader[1].ToString());
-                            times.Add(Utils.UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString())));
-                        }
-                    }
-                }
-                SetTable(studentNames, studentLocations, times);
+                SetTable(allStudents.Select(i => i.getFullName()).ToList(), allStudents.Select(i => i.LatestLocation.getLocation()).ToList(), allStudents.Select(i => i.LatestLocation.getCheckInString()).ToList());
+            }
+            catch
+            {
+                SetTable(allStudents.Select(i => i.getFullName()).ToList());
             }
         }
 
-        protected void SetTable(List<string> studentNames, List<string> studentLocations, List<DateTime> times)
+        protected void SetTable(List<string> studentNames, List<string> studentLocations = null, List<string> times = null)
         {
             DataTable dt = new DataTable();
             DataColumn dc = new DataColumn();
@@ -56,8 +43,18 @@ namespace UniWebsite
             {
                 DataRow NewRow = dt.NewRow();
                 NewRow[0] = studentNames[i];
-                NewRow[1] = studentLocations[i];
-                NewRow[2] = times[i].ToString("dd/MM/yyyy hh:mm:ss tt");
+
+                if (studentLocations != null && !String.IsNullOrEmpty(studentLocations[i]))
+                    NewRow[1] = studentLocations[i];
+                else
+                    NewRow[1] = "No Location";
+
+
+                if (times != null && !String.IsNullOrEmpty(times[i]))
+                    NewRow[2] = times[i];
+                else
+                    NewRow[2] = "No Check-In Time";
+
                 dt.Rows.Add(NewRow);
             }
             allStudentsTable.DataSource = dt;

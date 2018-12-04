@@ -11,7 +11,27 @@ namespace UniWebsite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                List<Student> allStudents = new List<Student>();
 
+                allStudents = SQL_Methods.GetAllStudents();
+                Utils.PopulateStudentDropDown(allStudents, ref selectStudentList);
+                selectStudentList_SelectedIndexChanged(sender, e);
+            }
+        }
+
+        protected void selectStudentList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
+
+            studentFirstName.Text = student.FirstName;
+            studentLastName.Text = student.LastName;
+        }
+
+        protected void editStudentButton_Click(object sender, EventArgs e)
+        {
+            SQL_Methods.EditStudent(Convert.ToInt32(selectStudentList.SelectedValue), studentFirstName.Text, studentLastName.Text);
         }
     }
 }

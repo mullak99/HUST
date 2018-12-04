@@ -24,12 +24,6 @@
             </div>
                 <asp:TextBox ID="studentLastName" runat="server" Height="18px" MaxLength="64" Width="150px"></asp:TextBox>
             <div>
-                <asp:Label ID="studentLocationLabel" runat="server" Text="Student Location: " ForeColor="White"></asp:Label>
-            </div>
-            <div>
-                <asp:TextBox ID="studentLocation" runat="server" Height="18px" MaxLength="256" Width="150px"></asp:TextBox>
-            </div>
-            <div>
                 <p></p>
                 <asp:Button ID="addStudent" runat="server" Text="Add Student" OnClick="addStudent_Click" />
             </div>

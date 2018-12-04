@@ -16,24 +16,10 @@ namespace UniWebsite
         {
             if (!IsPostBack)
             {
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
-                {
-                    var query = "SELECT UID, CONCAT(FirstName, ' ', LastName) AS FullName FROM students";
+                List<Student> allStudents = new List<Student>();
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        DataSet ds = new DataSet();
-                        MySqlDataAdapter da = new MySqlDataAdapter(command);
-                        connection.Open();
-                        da.Fill(ds, "Students");
-
-                        selectStudentList.DataSource = ds.Tables[0];
-                        selectStudentList.DataTextField = "FullName";
-                        selectStudentList.DataValueField = "UID";
-                        selectStudentList.DataBind();
-                    }
-                }
-
+                allStudents = SQL_Methods.GetAllStudents();
+                Utils.PopulateStudentDropDown(allStudents, ref selectStudentList);
                 selectStudentList_SelectedIndexChanged(sender, e);
             }
         }
@@ -42,29 +28,7 @@ namespace UniWebsite
 
         protected void selectStudentList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string studentName = "";
-            string studentLocation = "";
-            DateTime time = new DateTime();
-
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
-            {
-                var query = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Location, Time FROM students WHERE UID = " + selectStudentList.SelectedValue;
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            studentName = reader[0].ToString();
-                            studentLocation = reader[1].ToString();
-                            time = Utils.UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString()));
-                        }
-                    }
-                }
-            }
-
+            Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
             dt.Clear();
 
             if (dt.Columns.Count == 0)
@@ -75,9 +39,15 @@ namespace UniWebsite
             }
 
             DataRow NewRow = dt.NewRow();
-            NewRow[0] = studentName;
-            NewRow[1] = studentLocation;
-            NewRow[2] = time.ToString("dd/MM/yyyy hh:mm:ss tt");
+            NewRow[0] = student.getFullName();
+
+            if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
+                NewRow[1] = student.LatestLocation.getLocation();
+            else
+                NewRow[1] = "No Location";
+
+            NewRow[2] = student.LatestLocation.getCheckInString();
+
             dt.Rows.Add(NewRow);
             StudentGrid.DataSource = dt;
             StudentGrid.DataBind();

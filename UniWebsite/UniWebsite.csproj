@@ -75,6 +75,8 @@
     <Content Include="EditStudent.aspx" />
     <Content Include="GetAllStudents.aspx" />
     <Content Include="GetStudent.aspx" />
+    <Content Include="location.aspx" />
+    <Content Include="ChangeStudentLocation.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -87,6 +89,7 @@
     <Compile Include="AddStudent.aspx.designer.cs">
       <DependentUpon>AddStudent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseHandler\Location.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -115,7 +118,23 @@
     <Compile Include="GetStudent.aspx.designer.cs">
       <DependentUpon>GetStudent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="location.aspx.cs">
+      <DependentUpon>location.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="location.aspx.designer.cs">
+      <DependentUpon>location.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ChangeStudentLocation.aspx.cs">
+      <DependentUpon>ChangeStudentLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangeStudentLocation.aspx.designer.cs">
+      <DependentUpon>ChangeStudentLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SQL_Methods\SQL_Methods.cs" />
+    <Compile Include="DatabaseHandler\Student.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

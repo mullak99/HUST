@@ -10,7 +10,7 @@
 namespace UniWebsite {
     
     
-    public partial class AddStudent {
+    public partial class ChangeStudentLocation {
         
         /// <summary>
         /// form1 control.
@@ -22,66 +22,102 @@ namespace UniWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// SqlDataSource control.
+        /// selectStudentLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource;
+        protected global::System.Web.UI.WebControls.Label selectStudentLabel;
         
         /// <summary>
-        /// studentNameLabel control.
+        /// ScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label studentNameLabel;
+        protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
-        /// studentFirstNameLabel control.
+        /// selectStudentList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label studentFirstNameLabel;
+        protected global::System.Web.UI.WebControls.DropDownList selectStudentList;
         
         /// <summary>
-        /// studentFirstName control.
+        /// UpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox studentFirstName;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel;
         
         /// <summary>
-        /// studentLastNameLabel control.
+        /// currentLocLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label studentLastNameLabel;
+        protected global::System.Web.UI.WebControls.Label currentLocLabel;
         
         /// <summary>
-        /// studentLastName control.
+        /// currentLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox studentLastName;
+        protected global::System.Web.UI.WebControls.Label currentLoc;
         
         /// <summary>
-        /// addStudent control.
+        /// currentLocTimeLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addStudent;
+        protected global::System.Web.UI.WebControls.Label currentLocTimeLabel;
+        
+        /// <summary>
+        /// checkinTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label checkinTime;
+        
+        /// <summary>
+        /// changeStudentLocLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label changeStudentLocLabel;
+        
+        /// <summary>
+        /// changeStudentLoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox changeStudentLoc;
+        
+        /// <summary>
+        /// changeLocButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button changeLocButton;
     }
 }
