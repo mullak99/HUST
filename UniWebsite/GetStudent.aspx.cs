@@ -54,7 +54,7 @@ namespace UniWebsite
                         {
                             studentName = reader[0].ToString();
                             studentLocation = reader[1].ToString();
-                            time = UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString()));
+                            time = Utils.UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString()));
                         }
                     }
                 }
@@ -77,13 +77,6 @@ namespace UniWebsite
             dt.Rows.Add(NewRow);
             StudentGrid.DataSource = dt;
             StudentGrid.DataBind();
-        }
-
-        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -24,9 +25,9 @@ namespace UniWebsite
                 using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
 
-                    string LastName = studentLastName.Text;
-                    string FirstName = studentFirstName.Text;
-                    string Location = studentLocation.Text;
+                    string LastName = Utils.UppercaseFirst(Utils.SqlEscape(studentLastName.Text));
+                    string FirstName = Utils.UppercaseFirst(Utils.SqlEscape(studentFirstName.Text));
+                    string Location = Utils.SqlEscape(studentLocation.Text);
 
                     MySqlCommand checkIfExists = new MySqlCommand("SELECT * FROM students WHERE (FirstName = '" + FirstName + "') AND (LastName = '" + LastName + "')", connection);
 

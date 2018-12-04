@@ -23,19 +23,6 @@ namespace UniWebsite
             {
                 var query = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Location, Time FROM students";
 
-                /*
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    connection.Open();
-                    MySqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    DataTable dt = new DataTable();
-                    dt.Load(dr);
-
-                    allStudentsTable.DataSource = dt;
-                    allStudentsTable.DataBind();
-                }
-                */
-
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     connection.Open();
@@ -45,7 +32,7 @@ namespace UniWebsite
                         {
                             studentNames.Add(reader[0].ToString());
                             studentLocations.Add(reader[1].ToString());
-                            times.Add(UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString())));
+                            times.Add(Utils.UnixTimeStampToDateTime(Convert.ToDouble(reader[2].ToString())));
                         }
                     }
                 }
@@ -76,13 +63,6 @@ namespace UniWebsite
             }
             allStudentsTable.DataSource = dt;
             allStudentsTable.DataBind();
-        }
-
-        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
         }
     }
 }
