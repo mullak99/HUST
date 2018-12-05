@@ -57,11 +57,13 @@ namespace UniWebsite
             {
                 using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    var query = "SELECT UID, FirstName, LastName, Location, Time FROM students WHERE CONCAT(FirstName, ' ', LastName) AS FullName = " + StudentFullName;
+                    var query = "SELECT UID, FirstName, LastName, Location, Time FROM students WHERE CONCAT(FirstName, ' ', LastName) AS FullName = @fullName";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@fullName", Utils.SqlEscape(StudentFullName));
+
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -85,11 +87,14 @@ namespace UniWebsite
             {
                 using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    var query = "SELECT UID, FirstName, LastName FROM students WHERE UID = " + UID;
+                    var query = "SELECT UID, FirstName, LastName FROM students WHERE UID = @uid";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         connection.Open();
+
+                        command.Parameters.AddWithValue("@uid", UID);
+
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -157,11 +162,15 @@ namespace UniWebsite
             {
                 using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    var query = "UPDATE students SET FirstName = '" + Utils.SqlEscape(FirstName) + "', LastName = '" + Utils.SqlEscape(LastName) + "' WHERE students.UID = " + UID;
+                    var query = "UPDATE students SET FirstName = @firstName, LastName = @lastName WHERE students.UID = @uid";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         connection.Open();
+
+                        command.Parameters.AddWithValue("@lastName", Utils.UppercaseFirst(Utils.SqlEscape(LastName)));
+                        command.Parameters.AddWithValue("@firstName", Utils.UppercaseFirst(Utils.SqlEscape(FirstName)));
+                        command.Parameters.AddWithValue("@uid", UID);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -223,11 +232,13 @@ namespace UniWebsite
         {
             using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
-                var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = " + studentUID + " ORDER BY UID DESC";
+                var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = @uid ORDER BY UID DESC";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     connection.Open();
+                    command.Parameters.AddWithValue("@uid", studentUID.ToString());
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -263,11 +274,13 @@ namespace UniWebsite
 
             using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
-                var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = " + studentUID + " ORDER BY UID DESC";
+                var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = @uid ORDER BY UID DESC";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     connection.Open();
+                    command.Parameters.AddWithValue("@uid", studentUID.ToString());
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
