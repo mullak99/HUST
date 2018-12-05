@@ -55,14 +55,18 @@ namespace UniWebsite
         {
             try
             {
+                string firstName = StudentFullName.Substring(0, StudentFullName.IndexOf(" "));
+                string lastName = StudentFullName.Substring(StudentFullName.IndexOf(" ") + 1);
+
                 using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    var query = "SELECT UID, FirstName, LastName, Location, Time FROM students WHERE CONCAT(FirstName, ' ', LastName) AS FullName = @fullName";
+                    var query = "SELECT UID, FirstName, LastName FROM students WHERE FirstName = @firstName AND LastName = @lastName";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         connection.Open();
-                        command.Parameters.AddWithValue("@fullName", Utils.SqlEscape(StudentFullName));
+                        command.Parameters.AddWithValue("@firstName", firstName);
+                        command.Parameters.AddWithValue("@lastName", lastName);
 
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
@@ -249,6 +253,11 @@ namespace UniWebsite
                 }
             }
             return null;
+        }
+
+        public static Location GetCurrentStudentLocation(string fullName)
+        {
+            return GetCurrentStudentLocation(GetStudent(fullName).UID);
         }
 
         public static void SetStudentCurrentLocation(int studentUID, string location)

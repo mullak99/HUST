@@ -48,5 +48,10 @@ namespace UniWebsite
         {
             return LatestLocation;
         }
+
+        public override string ToString()
+        {
+            return String.Format("UID: {0}, LastName: {1}, FirstName: {2}, Location: {3}", UID, LastName, FirstName, LatestLocation.ToString());
+        }
     }
 }

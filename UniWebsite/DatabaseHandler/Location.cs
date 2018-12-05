@@ -35,5 +35,10 @@ namespace UniWebsite
             else
                 return "No Check-In Time";
         }
+
+        public override string ToString()
+        {
+            return String.Format("Latest Location: {0}, Check-In Time: {1}", CheckInLocation, getCheckInString());
+        }
     }
 }

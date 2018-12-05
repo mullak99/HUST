@@ -31,7 +31,8 @@ namespace UniWebsite
 
         protected void editStudentButton_Click(object sender, EventArgs e)
         {
-            SQL_Methods.EditStudent(Convert.ToInt32(selectStudentList.SelectedValue), studentFirstName.Text, studentLastName.Text);
+            if (!String.IsNullOrEmpty(studentLastName.Text) && !String.IsNullOrEmpty(studentFirstName.Text) && !String.IsNullOrWhiteSpace(studentLastName.Text) && !String.IsNullOrWhiteSpace(studentFirstName.Text))
+                SQL_Methods.EditStudent(Convert.ToInt32(selectStudentList.SelectedValue), studentFirstName.Text, studentLastName.Text);
         }
 
         protected void deleteStudentButton_Click(object sender, EventArgs e)

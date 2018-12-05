@@ -20,7 +20,7 @@ namespace UniWebsite
 
         protected void addStudent_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(studentLastName.Text) && !String.IsNullOrEmpty(studentFirstName.Text))
+            if (!String.IsNullOrEmpty(studentLastName.Text) && !String.IsNullOrEmpty(studentFirstName.Text) && !String.IsNullOrWhiteSpace(studentLastName.Text) && !String.IsNullOrWhiteSpace(studentFirstName.Text))
             {
                 SQL_Methods.AddStudent(studentFirstName.Text, studentLastName.Text);
             }
