@@ -71,6 +71,8 @@ namespace UniWebsite
         {
             try
             {
+                
+
                 List<Location> allLocations = SQL_Methods.GetStudentsLocationHistory(Convert.ToInt32(selectStudentList.SelectedValue));
 
                 DateTime now = DateTime.UtcNow;
@@ -100,6 +102,11 @@ namespace UniWebsite
             {
                 locationHistory.Clear();
             }
+
+            if (locationHistory.Rows.Count > 0)
+                locationHistoryLabel.Visible = true;
+            else
+                locationHistoryLabel.Visible = false;
         }
     }
 }

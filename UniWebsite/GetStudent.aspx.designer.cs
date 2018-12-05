@@ -67,6 +67,15 @@ namespace UniWebsite {
         protected global::System.Web.UI.WebControls.GridView StudentGrid;
         
         /// <summary>
+        /// locationHistoryLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label locationHistoryLabel;
+        
+        /// <summary>
         /// LocationGrid control.
         /// </summary>
         /// <remarks>

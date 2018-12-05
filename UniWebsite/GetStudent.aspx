@@ -62,7 +62,7 @@ li a:hover {
                     </div>
                     <div><p></p></div>
                     <div>
-                        <p style="color:#FFFFFF">Location History for the past 24 hours:</p>
+                        <asp:Label ID="locationHistoryLabel" runat="server" Text="Location History for the past 24 hours:" ForeColor="White" Visible="True"></asp:Label>
                         <asp:GridView ID="LocationGrid" runat="server" ForeColor="White"></asp:GridView>
                     </div>
                 </ContentTemplate>

@@ -43,7 +43,7 @@ namespace UniWebsite
 
         protected void editStudentLocButton_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(changeStudentLoc.Text) && String.IsNullOrWhiteSpace(changeStudentLoc.Text))
+            if (!String.IsNullOrEmpty(changeStudentLoc.Text) && !String.IsNullOrWhiteSpace(changeStudentLoc.Text))
             {
                 SQL_Methods.SetStudentCurrentLocation(Convert.ToInt32(selectStudentList.SelectedValue), Utils.UppercaseFirst(changeStudentLoc.Text));
                 Response.Redirect(Request.RawUrl);
