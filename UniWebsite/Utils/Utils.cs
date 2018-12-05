@@ -44,5 +44,24 @@ namespace UniWebsite
             dropDownList.DataValueField = "UID";
             dropDownList.DataBind();
         }
+
+        public static void PopulateLocationDropDown(List<Student> students, ref DropDownList dropDownList)
+        {            
+            List<string> locations = new List<string>();
+
+            foreach (Student student in students)
+            {
+                try
+                {
+                    if (!locations.Contains(student.LatestLocation.CheckInLocation))
+                        locations.Add(student.LatestLocation.CheckInLocation);
+                }
+                catch
+                { }
+            }
+
+            dropDownList.DataSource = locations;
+            dropDownList.DataBind();
+        }
     }
 }

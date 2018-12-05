@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddStudent.aspx" />
+    <Content Include="CurrentLocations.aspx" />
     <Content Include="default.aspx" />
     <Content Include="EditStudent.aspx" />
     <Content Include="GetAllStudents.aspx" />
@@ -88,6 +89,13 @@
     </Compile>
     <Compile Include="AddStudent.aspx.designer.cs">
       <DependentUpon>AddStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentLocations.aspx.cs">
+      <DependentUpon>CurrentLocations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CurrentLocations.aspx.designer.cs">
+      <DependentUpon>CurrentLocations.aspx</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHandler\Location.cs" />
     <Compile Include="default.aspx.cs">

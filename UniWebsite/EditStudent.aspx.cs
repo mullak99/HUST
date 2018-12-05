@@ -33,5 +33,11 @@ namespace UniWebsite
         {
             SQL_Methods.EditStudent(Convert.ToInt32(selectStudentList.SelectedValue), studentFirstName.Text, studentLastName.Text);
         }
+
+        protected void deleteStudentButton_Click(object sender, EventArgs e)
+        {
+            SQL_Methods.DeleteStudent(Convert.ToInt32(selectStudentList.SelectedValue));
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
     }
 }

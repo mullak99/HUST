@@ -31,6 +31,26 @@ namespace UniWebsite
             }
         }
 
+        public static bool DoesStudentExist(int UID)
+        {
+            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            {
+                using (MySqlCommand sqlCommand = new MySqlCommand("SELECT COUNT(1) FROM students WHERE UID = @uid", connection))
+                {
+                    connection.Open();
+                    sqlCommand.Parameters.AddWithValue("@uid", UID);
+
+                    Object o = sqlCommand.ExecuteScalar();
+                    int userCount = Convert.ToInt32(o);
+
+                    if (userCount > 0)
+                        return true;
+
+                    return false;
+                }
+            }
+        }
+
         public static Student GetStudent(string StudentFullName)
         {
             try
@@ -112,10 +132,11 @@ namespace UniWebsite
 
         public static void AddStudent(string FirstName, string LastName)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            if (!DoesStudentExist(FirstName, LastName))
             {
-                if (!SQL_Methods.DoesStudentExist(FirstName, LastName))
+                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
+
                     var query = "INSERT INTO students (LastName, FirstName) VALUES (@lastName, @firstName)";
                     using (var command = new MySqlCommand(query, connection))
                     {
@@ -125,23 +146,75 @@ namespace UniWebsite
                         command.Parameters.AddWithValue("@firstName", Utils.UppercaseFirst(Utils.SqlEscape(FirstName)));
                         command.ExecuteNonQuery();
                     }
+
                 }
             }
         }
 
         public static void EditStudent(int UID, string FirstName, string LastName)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            if (!DoesStudentExist(FirstName, LastName))
             {
-                var query = "UPDATE students SET FirstName = '" + Utils.SqlEscape(FirstName) + "', LastName = '" + Utils.SqlEscape(LastName) + "' WHERE students.UID = " + UID;
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
+                    var query = "UPDATE students SET FirstName = '" + Utils.SqlEscape(FirstName) + "', LastName = '" + Utils.SqlEscape(LastName) + "' WHERE students.UID = " + UID;
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
         }
+
+        public static void DeleteStudent(int UID)
+        {
+            if (DoesStudentExist(UID))
+            {
+                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                {
+                    var query = "DELETE FROM students WHERE UID = @uid";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@uid", UID);
+                        command.ExecuteNonQuery();
+                    }
+
+                    var query2 = "DELETE FROM locations WHERE CheckInUID = @uid";
+
+                    using (MySqlCommand command = new MySqlCommand(query2, connection))
+                    {
+                        command.Parameters.AddWithValue("@uid", UID);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        public static List<Student> GetStudentsAtLocation(string location)
+        {
+            List<Student> allStudents = GetAllStudents();
+            List<Location> allLocations = new List<Location>();
+            List<Student> studentsAtLocation = new List<Student>();
+
+            foreach (Student student in allStudents)
+            {
+                Location loc = GetCurrentStudentLocation(student.UID);
+
+                try
+                {
+                    if (loc.getLocation().ToLower() == location.ToLower())
+                        studentsAtLocation.Add(student);
+                }
+                catch
+                { }
+            }
+            return studentsAtLocation;
+        }
+
         #endregion
 
         #region Location SQL Methods

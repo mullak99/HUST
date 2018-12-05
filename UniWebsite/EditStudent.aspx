@@ -32,6 +32,8 @@
             <div>
                 <p></p>
                 <asp:Button ID="editStudentButton" runat="server" Text="Edit Student" OnClick="editStudentButton_Click" />
+                <p></p><p style="color:#FFFFFF">This action is NOT reversable!</p>
+                <asp:Button ID="deleteStudentButton" runat="server" Text="Delete Student" OnClick="deleteStudentButton_Click" BackColor="Red" BorderColor="#CC0000" ForeColor="White" />
             </div>
                 </ContentTemplate>
                 <Triggers>
