@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class ChangeStudentLocation : System.Web.UI.Page
     {

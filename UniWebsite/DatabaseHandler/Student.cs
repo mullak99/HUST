@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UniWebsite
+namespace HUST
 {
     public class Student
     {

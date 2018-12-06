@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace UniWebsite
+namespace HUST
 {
     public class Utils
     {

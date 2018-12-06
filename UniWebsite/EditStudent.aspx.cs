@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class EditStudent : System.Web.UI.Page
     {

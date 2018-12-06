@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class GetAllStudents : System.Web.UI.Page
     {

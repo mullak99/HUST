@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditStudent.aspx.cs" Inherits="UniWebsite.EditStudent" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditStudent.aspx.cs" Inherits="HUST.EditStudent" %>
 
 <!DOCTYPE html>
 <style type="text/css">
@@ -30,7 +30,7 @@ li a:hover {
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>RDE Website | Edit Student</title>
+    <title>HUST | Edit Student</title>
 </head>
 <body style="background-color:#282828">
     <form id="form1" runat="server">

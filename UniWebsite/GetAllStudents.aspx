@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GetAllStudents.aspx.cs" Inherits="UniWebsite.GetAllStudents" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GetAllStudents.aspx.cs" Inherits="HUST.GetAllStudents" %>
 
 <!DOCTYPE html>
 <style type="text/css">
@@ -30,7 +30,7 @@ li a:hover {
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>RDE Server | All Students</title>
+    <title>HUST | Show All Students</title>
 </head>
 <body style="background-color:#282828">
     <form id="form1" runat="server">

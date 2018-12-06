@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="UniWebsite._default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="HUST._default" %>
 
 <!DOCTYPE html>
 <style type="text/css">
@@ -30,7 +30,7 @@ li a:hover {
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>RDE Website</title>
+    <title>HUST | Home</title>
 </head>
 <body style="background-color:#282828">
     <form id="form1" runat="server">
@@ -48,7 +48,7 @@ li a:hover {
         </div>
         <div>
             <p></p>
-            <p style="color:#FFFFFF">Welcome to the RDE Student Location Tracker!</p>
+            <p style="color:#FFFFFF">Welcome to the Hull University Student Tracker!</p>
             <p style="color:#FFFFFF">Navigate to one of the pages above.</p>
         </div>
     </form>

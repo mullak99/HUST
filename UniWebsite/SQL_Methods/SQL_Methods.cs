@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 
-namespace UniWebsite
+namespace HUST
 {
     public class SQL_Methods
     {

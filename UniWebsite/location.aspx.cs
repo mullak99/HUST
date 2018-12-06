@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class location : System.Web.UI.Page
     {

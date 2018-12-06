@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class _default : Page
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UniWebsite {
+namespace HUST {
     
     
     public partial class ChangeStudentLocation {

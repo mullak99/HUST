@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeStudentLocation.aspx.cs" Inherits="UniWebsite.ChangeStudentLocation" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ChangeStudentLocation.aspx.cs" Inherits="HUST.ChangeStudentLocation" %>
 
 <!DOCTYPE html>
 <style type="text/css">
@@ -30,7 +30,7 @@ li a:hover {
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>RDE Website | Change Student Location</title>
+    <title>HUST | Set Student Location</title>
 </head>
 <body style="background-color:#282828">
     <form id="form1" runat="server">

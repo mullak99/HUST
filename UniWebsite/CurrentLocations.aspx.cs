@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class CurrentLocations : System.Web.UI.Page
     {

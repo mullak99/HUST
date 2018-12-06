@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web.UI.WebControls;
 
-namespace UniWebsite
+namespace HUST
 {
     public partial class GetStudent : System.Web.UI.Page
     {
