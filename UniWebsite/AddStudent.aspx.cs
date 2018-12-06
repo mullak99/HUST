@@ -1,13 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
 
 namespace UniWebsite
 {
@@ -22,7 +13,12 @@ namespace UniWebsite
         {
             if (!String.IsNullOrEmpty(studentLastName.Text) && !String.IsNullOrEmpty(studentFirstName.Text) && !String.IsNullOrWhiteSpace(studentLastName.Text) && !String.IsNullOrWhiteSpace(studentFirstName.Text))
             {
+                messageLabel.Text = String.Format("Student: '{0} {1}' added to the database.", studentFirstName.Text, studentLastName.Text);
                 SQL_Methods.AddStudent(studentFirstName.Text, studentLastName.Text);
+            }
+            else
+            {
+                messageLabel.Text = String.Format("Please enter a valid first and last name!");
             }
         }
     }

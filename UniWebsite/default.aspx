@@ -36,6 +36,7 @@ li a:hover {
     <form id="form1" runat="server">
         <div>
             <ul>
+                <li><asp:ImageButton href="default.aspx" ID="homeImage" runat="server" Height="43px" ImageAlign="Left" ImageUrl="~/Images/HullUni.png" Width="72px" /></li>
                 <li><a class="active" href="default.aspx">Home</a></li>
                 <li><a href="AddStudent.aspx">Add Student</a></li>
                 <li><a href="EditStudent.aspx">Edit Student</a></li>

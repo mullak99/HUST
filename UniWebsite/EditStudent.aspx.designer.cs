@@ -22,6 +22,15 @@ namespace UniWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// homeImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton homeImage;
+        
+        /// <summary>
         /// selectStudentLabel control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,24 @@ namespace UniWebsite {
         protected global::System.Web.UI.WebControls.Button editStudentButton;
         
         /// <summary>
+        /// UpdatePanelDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelDelete;
+        
+        /// <summary>
+        /// messageDeleteLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label messageDeleteLabel;
+        
+        /// <summary>
         /// deleteStudentButton control.
         /// </summary>
         /// <remarks>
@@ -110,5 +137,14 @@ namespace UniWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button deleteStudentButton;
+        
+        /// <summary>
+        /// NoStudentsWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NoStudentsWarning;
     }
 }

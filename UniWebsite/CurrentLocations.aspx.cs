@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace UniWebsite
 {
@@ -14,10 +10,20 @@ namespace UniWebsite
         {
             if (!IsPostBack)
             {
-                List<Student> allStudents = SQL_Methods.GetAllStudents();
+                try
+                {
+                    List<Student> allStudents = SQL_Methods.GetAllStudents();
 
-                Utils.PopulateLocationDropDown(allStudents, ref selectLocationList);
-                selectLocationList_SelectedIndexChanged(sender, e);
+                    Utils.PopulateLocationDropDown(allStudents, ref selectLocationList);
+                    selectLocationList_SelectedIndexChanged(sender, e);
+                }
+                catch
+                {
+                    selectLocationLabel.Visible = false;
+                    selectLocationList.Visible = false;
+                    StudentGrid.Visible = false;
+                    NoStudentsWarning.Visible = true;
+                }
             }
         }
 

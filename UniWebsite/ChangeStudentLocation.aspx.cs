@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace UniWebsite
 {
@@ -23,21 +19,40 @@ namespace UniWebsite
 
         protected void selectStudentList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
-
             try
             {
-                if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
-                    currentLoc.Text = student.LatestLocation.getLocation();
-                else
-                    currentLoc.Text = "No Location";
+                Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
 
-                checkinTime.Text = student.LatestLocation.getCheckInString();
+                try
+                {
+                    if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
+                        currentLoc.Text = student.LatestLocation.getLocation();
+                    else
+                        currentLoc.Text = "No Location";
+
+                    checkinTime.Text = student.LatestLocation.getCheckInString();
+                }
+                catch
+                {
+                    currentLoc.Text = "No Location";
+                    checkinTime.Text = "No Check-In Time";
+                }
             }
             catch
             {
                 currentLoc.Text = "No Location";
                 checkinTime.Text = "No Check-In Time";
+                changeLocButton.Enabled = false;
+                changeLocButton.Visible = false;
+                selectStudentList.Visible = false;
+                currentLocLabel.Visible = false;
+                currentLoc.Visible = false;
+                currentLocTimeLabel.Visible = false;
+                checkinTime.Visible = false;
+                changeStudentLocLabel.Visible = false;
+                changeStudentLoc.Visible = false;
+                selectStudentLabel.Visible = false;
+                NoStudentsWarning.Visible = true;
             }
         }
 

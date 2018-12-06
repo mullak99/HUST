@@ -36,6 +36,7 @@ li a:hover {
     <form id="form1" runat="server">
         <div>
             <ul>
+                <li><asp:ImageButton href="default.aspx" ID="homeImage" runat="server" Height="43px" ImageAlign="Left" ImageUrl="~/Images/HullUni.png" Width="72px" /></li>
                 <li><a href="default.aspx">Home</a></li>
                 <li><a class="active" href="AddStudent.aspx">Add Student</a></li>
                 <li><a href="EditStudent.aspx">Edit Student</a></li>
@@ -59,7 +60,19 @@ li a:hover {
             <div>
                 <asp:Label ID="studentLastNameLabel" runat="server" Text="Last Name: " ForeColor="White"></asp:Label>
             </div>
-                <asp:TextBox ID="studentLastName" runat="server" Height="18px" MaxLength="64" Width="150px"></asp:TextBox>
+            <asp:TextBox ID="studentLastName" runat="server" Height="18px" MaxLength="64" Width="150px"></asp:TextBox>
+            <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div>
+                        <p></p>
+                        <asp:Label ID="messageLabel" runat="server" Text="" ForeColor="White"></asp:Label> 
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="addStudent" EventName="Click" runat="server"/>
+                </Triggers>
+            </asp:UpdatePanel>
             <div>
                 <p></p>
                 <asp:Button ID="addStudent" runat="server" Text="Add Student" OnClick="addStudent_Click" />

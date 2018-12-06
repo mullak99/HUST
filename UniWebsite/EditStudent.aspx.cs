@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace UniWebsite
 {
@@ -23,10 +19,29 @@ namespace UniWebsite
 
         protected void selectStudentList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
+            try
+            {
+                Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
 
-            studentFirstName.Text = student.FirstName;
-            studentLastName.Text = student.LastName;
+                studentFirstName.Text = student.FirstName;
+                studentLastName.Text = student.LastName;
+                messageDeleteLabel.Text = "";
+            }
+            catch
+            {
+                editStudentButton.Enabled = false;
+                deleteStudentButton.Enabled = false;
+                editStudentButton.Visible = false;
+                deleteStudentButton.Visible = false;
+                selectStudentLabel.Visible = false;
+                selectStudentList.Visible = false;
+                studentFirstNameLabel.Visible = false;
+                studentFirstName.Visible = false;
+                studentLastNameLabel.Visible = false;
+                studentLastName.Visible = false;
+                NoStudentsWarning.Visible = true;
+                messageDeleteLabel.Text = "";
+            }
         }
 
         protected void editStudentButton_Click(object sender, EventArgs e)
@@ -37,8 +52,15 @@ namespace UniWebsite
 
         protected void deleteStudentButton_Click(object sender, EventArgs e)
         {
-            SQL_Methods.DeleteStudent(Convert.ToInt32(selectStudentList.SelectedValue));
-            Response.Redirect(Request.Url.AbsoluteUri);
+            if (!String.IsNullOrEmpty(messageDeleteLabel.Text))
+            {
+                SQL_Methods.DeleteStudent(Convert.ToInt32(selectStudentList.SelectedValue));
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            else
+            {
+                messageDeleteLabel.Text = String.Format("Are you sure you want to permanently delete '{0} {1}' from the database? Press 'Delete Student' again to confirm.", studentFirstName.Text, studentLastName.Text);
+            }
         }
     }
 }

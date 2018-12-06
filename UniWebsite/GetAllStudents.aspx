@@ -36,6 +36,7 @@ li a:hover {
     <form id="form1" runat="server">
         <div>
             <ul>
+                <li><asp:ImageButton href="default.aspx" ID="homeImage" runat="server" Height="43px" ImageAlign="Left" ImageUrl="~/Images/HullUni.png" Width="72px" /></li>
                 <li><a href="default.aspx">Home</a></li>
                 <li><a href="AddStudent.aspx">Add Student</a></li>
                 <li><a href="EditStudent.aspx">Edit Student</a></li>
@@ -48,6 +49,7 @@ li a:hover {
         <div>
             <p></p>
             <asp:GridView ID="allStudentsTable" runat="server" ForeColor="White"></asp:GridView>
+            <asp:Label ID="NoStudentsWarning" runat="server" Text="No Students in the database." ForeColor="White" Visible="False"></asp:Label>
         </div>
     </form>
 </body>

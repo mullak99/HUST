@@ -36,6 +36,7 @@ li a:hover {
     <form id="form1" runat="server">
         <div>
             <ul>
+                <li><asp:ImageButton href="default.aspx" ID="homeImage" runat="server" Height="43px" ImageAlign="Left" ImageUrl="~/Images/HullUni.png" Width="72px" /></li>
                 <li><a href="default.aspx">Home</a></li>
                 <li><a href="AddStudent.aspx">Add Student</a></li>
                 <li><a class="active" href="EditStudent.aspx">Edit Student</a></li>
@@ -70,7 +71,17 @@ li a:hover {
             <div>
                 <p></p>
                 <asp:Button ID="editStudentButton" runat="server" Text="Edit Student" OnClick="editStudentButton_Click" />
-                <p></p><p style="color:#FFFFFF">This action is NOT reversable!</p>
+                <asp:UpdatePanel ID="UpdatePanelDelete" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div>
+                        <asp:Label ID="messageDeleteLabel" runat="server" Text="" ForeColor="White"></asp:Label> 
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="deleteStudentButton" EventName="Click" runat="server"/>
+                </Triggers>
+            </asp:UpdatePanel>
+                <p></p>
                 <asp:Button ID="deleteStudentButton" runat="server" Text="Delete Student" OnClick="deleteStudentButton_Click" BackColor="Red" BorderColor="#CC0000" ForeColor="White" />
             </div>
                 </ContentTemplate>
@@ -78,6 +89,7 @@ li a:hover {
                     <asp:AsyncPostBackTrigger ControlID="selectStudentList" EventName="SelectedIndexChanged" runat="server"/>
                 </Triggers>
             </asp:UpdatePanel>
+            <asp:Label ID="NoStudentsWarning" runat="server" Text="No Students in the database." ForeColor="White" Visible="False"></asp:Label>
         </div>
     </form>
 </body>

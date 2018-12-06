@@ -22,6 +22,15 @@ namespace UniWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// homeImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton homeImage;
+        
+        /// <summary>
         /// selectLocationLabel control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,14 @@ namespace UniWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView StudentGrid;
+        
+        /// <summary>
+        /// NoStudentsWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NoStudentsWarning;
     }
 }

@@ -1,8 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data.SqlClient;
 using System.Web.Configuration;
 
 namespace UniWebsite
@@ -12,9 +10,9 @@ namespace UniWebsite
         #region Student SQL Methods
         public static bool DoesStudentExist(string FirstName, string LastName)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
-                using (MySqlCommand sqlCommand = new MySqlCommand("SELECT COUNT(1) FROM students WHERE FirstName = @firstname AND LastName = @lastname", connection))
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT COUNT(1) FROM students WHERE FirstName = @firstname AND LastName = @lastname", connection))
                 {
                     connection.Open();
                     sqlCommand.Parameters.AddWithValue("@firstname", FirstName);
@@ -33,9 +31,9 @@ namespace UniWebsite
 
         public static bool DoesStudentExist(int UID)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
-                using (MySqlCommand sqlCommand = new MySqlCommand("SELECT COUNT(1) FROM students WHERE UID = @uid", connection))
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT COUNT(1) FROM students WHERE UID = @uid", connection))
                 {
                     connection.Open();
                     sqlCommand.Parameters.AddWithValue("@uid", UID);
@@ -58,17 +56,17 @@ namespace UniWebsite
                 string firstName = StudentFullName.Substring(0, StudentFullName.IndexOf(" "));
                 string lastName = StudentFullName.Substring(StudentFullName.IndexOf(" ") + 1);
 
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
                     var query = "SELECT UID, FirstName, LastName FROM students WHERE FirstName = @firstName AND LastName = @lastName";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
                         command.Parameters.AddWithValue("@firstName", firstName);
                         command.Parameters.AddWithValue("@lastName", lastName);
 
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -89,17 +87,17 @@ namespace UniWebsite
         {
             try
             {
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
                     var query = "SELECT UID, FirstName, LastName FROM students WHERE UID = @uid";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
 
                         command.Parameters.AddWithValue("@uid", UID);
 
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -120,14 +118,14 @@ namespace UniWebsite
         {
             List<Student> allStudents = new List<Student>();
 
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
                 var query = "SELECT UID, FirstName, LastName FROM students";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     connection.Open();
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -143,11 +141,11 @@ namespace UniWebsite
         {
             if (!DoesStudentExist(FirstName, LastName))
             {
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
 
                     var query = "INSERT INTO students (LastName, FirstName) VALUES (@lastName, @firstName)";
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var command = new SqlCommand(query, connection))
                     {
                         connection.Open();
 
@@ -164,11 +162,11 @@ namespace UniWebsite
         {
             if (!DoesStudentExist(FirstName, LastName))
             {
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
                     var query = "UPDATE students SET FirstName = @firstName, LastName = @lastName WHERE students.UID = @uid";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
 
@@ -185,11 +183,11 @@ namespace UniWebsite
         {
             if (DoesStudentExist(UID))
             {
-                using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+                using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
                 {
                     var query = "DELETE FROM students WHERE UID = @uid";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         connection.Open();
                         command.Parameters.AddWithValue("@uid", UID);
@@ -198,7 +196,7 @@ namespace UniWebsite
 
                     var query2 = "DELETE FROM locations WHERE CheckInUID = @uid";
 
-                    using (MySqlCommand command = new MySqlCommand(query2, connection))
+                    using (SqlCommand command = new SqlCommand(query2, connection))
                     {
                         command.Parameters.AddWithValue("@uid", UID);
                         command.ExecuteNonQuery();
@@ -234,16 +232,16 @@ namespace UniWebsite
 
         public static Location GetCurrentStudentLocation(int studentUID)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
                 var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = @uid ORDER BY UID DESC";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     connection.Open();
                     command.Parameters.AddWithValue("@uid", studentUID.ToString());
 
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -262,10 +260,10 @@ namespace UniWebsite
 
         public static void SetStudentCurrentLocation(int studentUID, string location)
         {
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
                 var query = "INSERT INTO locations (Location, Time, CheckInUID) VALUES (@location, @time, @studentUID)";
-                using (var command = new MySqlCommand(query, connection))
+                using (var command = new SqlCommand(query, connection))
                 {
                     connection.Open();
 
@@ -281,16 +279,16 @@ namespace UniWebsite
         {
             List<Location> allLocations = new List<Location>();
 
-            using (var connection = new MySqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
+            using (var connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["sqlDbConnectionString"].ConnectionString))
             {
                 var query = "SELECT UID, Location, Time FROM locations WHERE CheckInUID = @uid ORDER BY UID DESC";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     connection.Open();
                     command.Parameters.AddWithValue("@uid", studentUID.ToString());
 
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {

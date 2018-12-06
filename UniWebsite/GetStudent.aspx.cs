@@ -1,11 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace UniWebsite
@@ -34,45 +30,53 @@ namespace UniWebsite
 
         private void UpdateStudentTable()
         {
-            Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
-            studentTable.Clear();
-
-            if (studentTable.Columns.Count == 0)
-            {
-                studentTable.Columns.Add("Student Name", typeof(string));
-                studentTable.Columns.Add("Current Student Location", typeof(string));
-                studentTable.Columns.Add("Location Check-In Time", typeof(string));
-            }
-
-            DataRow NewRow = studentTable.NewRow();
-            NewRow[0] = student.getFullName();
-
             try
             {
-                if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
-                    NewRow[1] = student.LatestLocation.getLocation();
-                else
-                    NewRow[1] = "No Location";
+                Student student = SQL_Methods.GetStudent(Convert.ToInt32(selectStudentList.SelectedValue));
+                studentTable.Clear();
 
-                NewRow[2] = student.LatestLocation.getCheckInString();
+                if (studentTable.Columns.Count == 0)
+                {
+                    studentTable.Columns.Add("Student Name", typeof(string));
+                    studentTable.Columns.Add("Current Student Location", typeof(string));
+                    studentTable.Columns.Add("Location Check-In Time", typeof(string));
+                }
+
+                DataRow NewRow = studentTable.NewRow();
+                NewRow[0] = student.getFullName();
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(student.LatestLocation.getLocation()))
+                        NewRow[1] = student.LatestLocation.getLocation();
+                    else
+                        NewRow[1] = "No Location";
+
+                    NewRow[2] = student.LatestLocation.getCheckInString();
+                }
+                catch
+                {
+                    NewRow[1] = "No Location";
+                    NewRow[2] = "No Check-In Time";
+                }
+
+                studentTable.Rows.Add(NewRow);
+                StudentGrid.DataSource = studentTable;
+                StudentGrid.DataBind();
             }
             catch
             {
-                NewRow[1] = "No Location";
-                NewRow[2] = "No Check-In Time";
+                studentTable.Clear();
+                selectStudentLabel.Visible = false;
+                selectStudentList.Visible = false;
+                NoStudentsWarning.Visible = true;
             }
-
-            studentTable.Rows.Add(NewRow);
-            StudentGrid.DataSource = studentTable;
-            StudentGrid.DataBind();
         }
 
         private void UpdateLocationTable()
         {
             try
             {
-                
-
                 List<Location> allLocations = SQL_Methods.GetStudentsLocationHistory(Convert.ToInt32(selectStudentList.SelectedValue));
 
                 DateTime now = DateTime.UtcNow;
